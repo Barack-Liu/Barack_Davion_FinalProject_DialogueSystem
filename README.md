@@ -1,6 +1,4 @@
-## CSS452_FinalProject
-
-# Davion_Barack_T3_DialogueSystem
+# CSS452 Final Project
 Davion_Barack_FinalProject_DialogueSystem
 
 # Team members
