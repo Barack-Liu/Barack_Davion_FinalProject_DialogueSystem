@@ -7,8 +7,9 @@
 "use strict";
 
 class DialogueText {
-    constructor(renderable) {
-        this.mRenderComponent = renderable;
+    constructor(text, name) {
+        this.mText = text;
+        this.mName = name;
         this.mVisible = true;
         this.mTextFont = font;
         this.mTextColor = float4;
@@ -40,7 +41,11 @@ class DialogueText {
 
     draw(aCamera) {
         if (this.isVisible()) {
-            this.mRenderComponent.draw(aCamera);
+            this.mAvatar.draw(aCamera);
+            this.mTextFrame.draw(aCamera);
+            this.mNameFrame.draw(aCamera);
+            this.mText.draw(aCamera);
+            this.mName.draw(aCamera);
         }
     }
 

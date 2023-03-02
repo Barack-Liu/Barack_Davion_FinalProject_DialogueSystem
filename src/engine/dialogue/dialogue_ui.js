@@ -7,16 +7,17 @@
 "use strict";
 
 class DialogueUI {
-    constructor(renderable) {
-        this.mRenderComponent = renderable;
+    constructor(avatar, textFrame, nameFrame) {
+        this.mAvatar = avatar;
+        this.mTextFrame = textFrame;
+        this.mNameFrame = nameFrame;
         this.mVisible = true;
-        this.mUIAvatar = texture;
-        this.mUILocation = float;
-        this.mUISize = float;
+        //this.mUIAvatar = texture;
+        this.mUIPosX = 0;
+        this.mUIPosY = 0;
+        this.mUISize = 1;
     }
 
-
-    
     getXform() { 
         return this.mRenderComponent.getXform(); 
     }
@@ -40,7 +41,11 @@ class DialogueUI {
 
     draw(aCamera) {
         if (this.isVisible()) {
-            this.mRenderComponent.draw(aCamera);
+            this.mText.draw(aCamera);
+            this.mName.draw(aCamera);
+            this.mAvatar.draw(aCamera);
+            this.mTextFrame.draw(aCamera);
+            this.mNameFrame.draw(aCamera);
         }
     }
 
