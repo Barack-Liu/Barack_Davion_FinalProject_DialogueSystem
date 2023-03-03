@@ -11,6 +11,9 @@ class MyGame extends engine.Scene {
     constructor() {
         super();
 
+        //Load transparency
+        this.kTrans = "assets/transparency.png";
+
         //Load resources 1
         this.kBg = "assets/bg_1.png";
         this.kAvatar = "assets/avatar_1.png";
@@ -35,13 +38,16 @@ class MyGame extends engine.Scene {
        this.kNameText3 = "Pikachu";
        this.kDialogueText3 = "Do you want to be my master?";          
 
-        this.kJSONSceneFile = "./assets/Chu_Han_Contention.json";
+        this.kJSONSceneFile = "./assets/The_Miraculous_Journey_of_a_Adventurer.json";
 
         // Init main camera
         this.mCamera = null;
 
         //Init dialogue counter
         this.mCounter = 0;
+
+        //Init transparency
+        this.mTrans = null;
 
         //Init dialogue system 1
         this.mBg = null;
@@ -96,6 +102,9 @@ class MyGame extends engine.Scene {
 
         //Load Json file
         engine.json.load(this.kJSONSceneFile);
+
+        //Load transparency
+        engine.texture.load(this.kTrans);
     }
 
     unload() {
@@ -116,73 +125,32 @@ class MyGame extends engine.Scene {
 
         //Unload Json
         engine.json.unload(this.kJSONSceneFile);
+
+        //Unload transparency
+        engine.json.unload(this.kTrans);
     }
 
     init() {
-        // Step A: set up the cameras
         this.mCamera = new engine.Camera(
-            vec2.fromValues(50, 50),   
-            // center of the camera is (50, 50)
-            100,                       
-            // width of camera is 100, height is 100
-            [0, 0, 1000, 1000]           
+            vec2.fromValues(89, 50),   
+            // center of the camera is (89, 50)
+            178,                       
+            // width of camera is 178, height is 100
+            [0, 0, 1780, 1000]           
             // left lower corner of viewport is (0,0)
-            //viewport resolution is (1000, 1000)
+            //viewport resolution is (1780, 1000)
         );
         this.mCamera.setBackgroundColor([1, 1, 1, 1]);
 
         //Large background image
         let bgR = new engine.TextureRenderable(this.kBg); 
-        bgR.getXform().setSize(100, 100);
-        bgR.getXform().setPosition(50, 50);
+        bgR.getXform().setSize(178, 100);
+        bgR.getXform().setPosition(89, 50);
         this.mBg = new engine.GameObject(bgR);
-
-        // //Avatar
-        // let avatarR = new engine.TextureRenderable(this.kAvatar);
-        // avatarR.getXform().setSize(50, 75);
-        // avatarR.getXform().setPosition(50, 50);
-        // this.mAvatar = new engine.GameObject(avatarR);
-        
-        // //Text bg
-        // let textBgR = new engine.TextureRenderable(this.kTextBg);
-        // textBgR.getXform().setSize(90,30);
-        // textBgR.getXform().setPosition(50, 20);
-        // this.mTextBg = new engine.GameObject(textBgR);
-
-        // //Name bg
-        // let nameBgR = new engine.TextureRenderable(this.kNameBg);
-        // nameBgR.getXform().setSize(20,6);
-        // nameBgR.getXform().setPosition(15, 40);
-        // this.mNameBg = new engine.GameObject(nameBgR);
-
-        // //Dialogue text
-        // this.mDialogueText = new engine.FontRenderable(this.kDialogueText);
-        // this.mDialogueText.setColor([0.3, 0.6, 0.9, 1]);
-        // this.mDialogueText.getXform().setPosition(10, 30);
-        // this.mDialogueText.setTextHeight(3);
-
-        // //Name text
-        // this.mNameText = new engine.FontRenderable(this.kNameText);
-        // this.mNameText.setColor([0.3, 0.6, 0.9, 1]);
-        // this.mNameText.getXform().setPosition(15,40);
-        // this.mNameText.setTextHeight(3);
-
-        //Init Dialogue system 1
-        // this.mDialogue = new engine.Dialogue(this.kAvatar, this.kTextBg, this.kNameText, this.kDialogueText);
-        // this.mDialogueSet.push(this.mDialogue);
-
-        //Init Dialogue system 2
-        // this.mDialogue2 = new engine.Dialogue(this.kAvatar2, this.kTextBg2, this.kNameText2, this.kDialogueText2);
-        // this.mDialogueSet.push(this.mDialogue2);
-
-        //Init Dialogue system 3
-        // this.mDialogue3 = new engine.Dialogue(this.kAvatar3, this.kTextBg3, this.kNameText3, this.kDialogueText3);
-        // this.mDialogueSet.push(this.mDialogue3);
 
         //Parse Json
         let sceneInfo = engine.json.get(this.kJSONSceneFile);
         this._parseDialogues(sceneInfo);
-    
     }
 
     _parseDialogues(sceneInfo){
@@ -190,8 +158,9 @@ class MyGame extends engine.Scene {
         let dialogueSet = [];
 
         for(i = 0; i< sceneInfo.DialogueSet.length; i++){
-            dialogueSet[i] = new engine.Dialogue(this.kAvatar, this.kTextBg, this.kNameText, this.kDialogueText);
+            dialogueSet[i] = new engine.Dialogue(this.kBg, this.kAvatar, this.kTextBg, this.kNameText, this.kDialogueText);
 
+            dialogueSet[i].setLargeBg(sceneInfo.DialogueSet[i].LargeBg);
             dialogueSet[i].setAvatar(sceneInfo.DialogueSet[i].Avatar);
             dialogueSet[i].setTextBg(sceneInfo.DialogueSet[i].TextBg);
             dialogueSet[i].setNameBg(sceneInfo.DialogueSet[i].NameBg);

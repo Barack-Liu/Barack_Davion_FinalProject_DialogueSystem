@@ -12,29 +12,13 @@ MyGame.prototype.drawWorld = function(cam) {
         cam.setViewAndCameraMatrix();
 
         this.mBg.draw(cam);
-
-        // this.mAvatar.draw(cam);
-        // this.mTextBg.draw(cam);
-        // this.mNameBg.draw(cam);
-        // this.mDialogueText.draw(cam);
-        // this.mNameText.draw(cam);
-
-        //Draw dialogue system 1
-        //this.mDialogue.draw(cam);
-
-        //Draw dialogue system 2
-        //this.mDialogue2.draw(cam);
-        
-        //Draw dialogue system 3
-        //this.mDialogue3.draw(cam);    
         
         //Draw all available dialogue
-        for(let i = 0; i < 3; i++){
+        for(let i = 0; i < this.mDialogueSet.length; i++){
             if(this.mDialogueSet[i].mVisible){
                 this.mDialogueSet[i].draw(cam); 
             }
         }
-        
     }
     //
     // This is the draw function, make sure to setup proper drawing environment, and more
