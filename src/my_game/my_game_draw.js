@@ -13,6 +13,9 @@ MyGame.prototype.drawWorld = function(cam) {
 
         this.mBg.draw(cam);
         
+        this.aDialog.draw(cam);
+        // this.bDialog.draw(cam);
+        
         //Draw all available dialogue
         for(let i = 0; i < this.mDialogueSet.length; i++){
             if(this.mDialogueSet[i].mVisible){
