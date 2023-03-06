@@ -6,7 +6,6 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 import engine from "../engine/index.js";
-import ParagraphRenderable from "../engine/renderables/paragraph_renderable.js";
 
 class MyGame extends engine.Scene {
     constructor() {
@@ -82,8 +81,10 @@ class MyGame extends engine.Scene {
 
         //Init dialogue system set
         this.mDialogueSet = [];
+    
+    
         this.aDialog = null;
-        this.bDialog = null;
+        this.mDialog = null;
     }
 
 
@@ -150,25 +151,17 @@ class MyGame extends engine.Scene {
         bgR.getXform().setSize(178, 100);
         bgR.getXform().setPosition(89, 50);
         this.mBg = new engine.GameObject(bgR);
-
-
-        this.aDialog = new ParagraphRenderable("Recently, such <#12bcee#people> have been the focal point of a global conversation. Facebook, for example, <#ee4412#recently> made its profit after tax the latest line item to be given public attention. The roll-out of a new ad platform meant that businesses have been given control over which users they can serve with the content they want to display.");
-        this.aDialog.init();
-        this.aDialog.setColor([0, 0, 0, 1]);
-        this.aDialog.setHeight(3);
-        this.aDialog.setPosition(21, 20);
-        this.aDialog.setLengthLimit(100);
-
-        // this.bDialog = new ParagraphRenderable("?.~1./1#$$%^&**() 3k4 sASl 2222");
-        // this.bDialog.init();
-        // this.bDialog.setColor([0, 0, 0, 1]);
-        // this.bDialog.setHeight(3);
-        // this.bDialog.setPosition(21, 17);
-
-
+        
         //Parse Json
         let sceneInfo = engine.json.get(this.kJSONSceneFile);
         this._parseDialogues(sceneInfo);
+
+        this.mDialog = new engine.Dialog();
+        this.mDialog.init([50, 20], 100, [120, 20], 1500, 300);
+        this.mDialog.setBackgroundTexture(this.kTextBg2);
+        this.mDialog.setAvatar(this.kAvatar3);
+        this.mDialog.setName("Pikachu");
+        this.mDialog.setParagraph("Recently, such <#12bcee#>people have been the focal point of a global <#eec812#>conversation. Facebook, for example, <#ee4412#>recently. made its profit after tax the latest line item to be given public <#2f23ab#>attention. The roll-out of a new ad platform meant that businesses have been given control over which users they can serve with the content they want to display.");
     }
 
     _parseDialogues(sceneInfo){

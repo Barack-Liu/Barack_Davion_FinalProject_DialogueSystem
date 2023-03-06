@@ -39,6 +39,7 @@ import SpriteRenderable from "./renderables/sprite_renderable.js";
 import SpriteAnimateRenderable from "./renderables/sprite_animate_renderable.js";
 import FontRenderable from "./renderables/font_renderable.js";
 import LineRenderable from "./renderables/line_renderable.js";
+import ParagraphRenderable from "./renderables/paragraph_renderable.js";
 import { eTexCoordArrayIndex } from "./renderables/sprite_renderable.js";
 import { eAnimationType } from "./renderables/sprite_animate_renderable.js";
 
@@ -56,6 +57,7 @@ import * as loop from "./core/loop.js";
 import DialogueUI from "./dialogue/dialogue_ui.js";
 import DialogueText from "./dialogue/dialogue_text.js";
 import Dialogue from "./dialogue/dialogue.js";
+import Dialog from "./dialogue/dialog.js";
 
 // general engine utilities
 function init(htmlCanvasID) {
@@ -98,13 +100,13 @@ export default {
     Camera, Scene, Transform, BoundingBox,  
      
     // Renderables
-    Renderable, TextureRenderable, SpriteRenderable, SpriteAnimateRenderable, FontRenderable, LineRenderable,
+    Renderable, TextureRenderable, SpriteRenderable, SpriteAnimateRenderable, FontRenderable, LineRenderable, ParagraphRenderable,
 
     // Game Objects
     GameObject, GameObjectSet,
 
     //Dialogue 
-    DialogueUI, DialogueText, Dialogue,
+    DialogueUI, DialogueText, Dialogue, Dialog,
 
     // constants
     eTexCoordArrayIndex, eAnimationType, eBoundCollideStatus,

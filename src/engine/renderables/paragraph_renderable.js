@@ -11,42 +11,58 @@ class ParagraphRenderable {
         this.mStartX = null;
         this.mStartY = null;
         this.mHeight = null;
-        this.hasColored = [];
+        this.mHasColored = [];
+
+        this.mVisiable = [];
+        this.mPlayInterval = 0;
+        this.mLastPlayTime = 0;
+        this.mPlayIndex = 0;
     }
 
     init() {
         for (let i = 0; i < this.mTokens.length; i++) {
             let rend;
             let str = this.mTokens[i];
-            console.log(str);
-            // console.log(/^</i.test(str) && />$/i.test(str));
-            // console.log(str.substring(9, str.length-1));
-            // if a token contains <>
-            if (/^</i.test(str) && />$/i.test(str)) {
-                rend = new FontRenderable(str.substring(9, str.length-1));
+            // if a token contains contains a <#6-digit-hex#> set color
+            if (/^\<\#[0-9a-fA-F]{6}\#\>.+/.test(str)) {
+                rend = new FontRenderable(str.substring(10));
                 let r = parseInt(str.substring(2, 4), 16) / 255;
                 let g = parseInt(str.substring(4, 6), 16) / 255;
                 let b = parseInt(str.substring(6, 8), 16) / 255;
-                console.log(r, g, b);
                 rend.setColor([r, g, b, 1])
-                this.hasColored.push(i);
+                this.mHasColored.push(i);
             }
             else
                 rend = new FontRenderable(str);
             this.mWordRenderable.push(rend);
+            this.mVisiable.push(this.mPlayInterval === 0 ? true : false);
         }
     }
 
     draw(camera) {
         for (let i = 0; i < this.mWordRenderable.length; i++) {
-            this.mWordRenderable[i].draw(camera);
+            if (this.mVisiable[i])
+                this.mWordRenderable[i].draw(camera);
         }
     }
 
+    update() {
+        let curTime = performance.now();
+        if (this.mPlayInterval > 0 && (curTime - this.mLastPlayTime) >= this.mPlayInterval 
+        && this.mPlayIndex < this.mWordRenderable.length) {
+            this.mVisiable[this.mPlayIndex] = true;
+            this.mLastPlayTime = curTime;
+            this.mPlayIndex++;
+        }
+    }
 
-
-    setSpeed() {
-
+    setPlayInterval(i) {
+        if (i > 0) {
+            for (let i = 0; i < this.mWordRenderable.length; i++) {
+                this.mVisiable[i] = false;
+            }
+            this.mPlayInterval = i;
+        }
     }
 
     setLengthLimit(l) { 
@@ -91,12 +107,12 @@ class ParagraphRenderable {
 
     setColor(c) {
         for (let i = 0; i < this.mWordRenderable.length; i++) {
-            if (!this.hasColored.includes(i))
+            if (!this.mHasColored.includes(i))
                 this.mWordRenderable[i].setColor(c);
         }
     }
 
-    setHeight(h) {
+    setTextHeight(h) {
         this.mHeight = h;
         for (let i = 0; i < this.mWordRenderable.length; i++) {
             this.mWordRenderable[i].setTextHeight(h);

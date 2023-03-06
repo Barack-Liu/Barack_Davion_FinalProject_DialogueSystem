@@ -12,6 +12,10 @@ import MyGame from "./my_game_draw.js";
 // anything from this function!
 MyGame.prototype.update = function () {
     //Left mouse botton click
+
+    this.mDialog.update();
+
+
     if(engine.input.isButtonClicked(engine.input.eMouseButton.eLeft)){
         if(this.mCounter < this.mDialogueSet.length){
             this.mDialogueSet[this.mCounter].mVisible = true;
