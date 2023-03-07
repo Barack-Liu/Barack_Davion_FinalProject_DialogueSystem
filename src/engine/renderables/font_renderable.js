@@ -83,19 +83,25 @@ class FontRenderable {
 
     /*
      * this can be a potentially useful function. Not included/tested in this version of the engine
-
-    getStringWidth(h) {
-        let stringWidth = 0;
-        let charSize = h;
-        let charIndex, aChar, charInfo;
-        for (charIndex = 0; charIndex < this.mText.length; charIndex++) {
-            aChar = this.mText.charCodeAt(charIndex);
-            charInfo = font.getCharInfo(this.mFont, aChar);
-            stringWidth += charSize * charInfo.mCharWidth * charInfo.mXAdvance;
-        }
-        return stringWidth;
-    }
     */
+
+    // getStringWidth(h) {
+    //     let stringWidth = 0;
+    //     let charSize = h;
+    //     let charIndex, aChar, charInfo;
+    //     for (charIndex = 0; charIndex < this.mText.length; charIndex++) {
+    //         aChar = this.mText.charCodeAt(charIndex);
+    //         charInfo = font.getCharInfo(this.mFontName, aChar);
+    //         // console.log(charSize, charInfo.mCharWidth, charInfo.mXAdvance)
+    //         stringWidth += charSize * charInfo.mCharWidth * charInfo.mXAdvance;
+    //     }
+    //     return stringWidth;
+    // }
+    
+    getStringWidth() {
+        let charInfo = font.getCharInfo(this.mFontName, "A".charCodeAt(0));
+        return (this.getXform().getHeight() * charInfo.mCharAspectRatio * this.mText.length);
+    }
 }
 
 export default FontRenderable;

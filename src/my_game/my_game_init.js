@@ -81,6 +81,12 @@ class MyGame extends engine.Scene {
 
         //Init dialogue system set
         this.mDialogueSet = [];
+    
+    
+        this.aDialog = null;
+        this.mDialog = null;
+
+        window.mIsOptionClicked = false;
     }
 
 
@@ -147,10 +153,31 @@ class MyGame extends engine.Scene {
         bgR.getXform().setSize(178, 100);
         bgR.getXform().setPosition(89, 50);
         this.mBg = new engine.GameObject(bgR);
-
+        
         //Parse Json
         let sceneInfo = engine.json.get(this.kJSONSceneFile);
         this._parseDialogues(sceneInfo);
+
+        //User case of Class Dialog
+        // this.mDialog = new engine.Dialog();
+        // this.mDialog.init([50, 20], 100, [120, 20], 1500, 300);
+        // this.mDialog.setBackgroundTexture(this.kTextBg2);
+        // this.mDialog.setAvatar(this.kAvatar3);
+        // this.mDialog.setName("Pikachu");
+        // this.mDialog.setParagraph("Recently, such <#12bcee#>people have been the focal point of a global <#eec812#>conversation. Facebook, for example, <#ee4412#>recently. made its profit after tax the latest line item to be given public <#2f23ab#>attention. The roll-out of a new ad platform meant that businesses have been given control over which users they can serve with the content they want to display.");
+
+        const button1 = document.createElement('button');
+        button1.textContent = 'Jump to P6';
+        button1.setAttribute('id', 'button1');
+        button1.setAttribute('class', 'my-button');
+        button1.style.fontSize = '30px';
+        button1.style.width = '178px';
+        button1.style.height = '100px';
+        button1.style.position = 'absolute';
+        button1.style.left = '800px';
+        button1.style.top = '333px';
+        document.body.appendChild(button1);
+        
     }
 
     _parseDialogues(sceneInfo){

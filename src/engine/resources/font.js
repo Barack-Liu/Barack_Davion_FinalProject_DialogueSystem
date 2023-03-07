@@ -27,8 +27,10 @@ class CharacterInfo {
         // reference to nominal character size, 1 is "standard width/height" of a char
         this.mCharWidth = 1;
         this.mCharHeight = 1;
+        this.mXAdvance = 1;
         this.mCharWidthOffset = 0;
         this.mCharHeightOffset = 0;
+        
 
         // reference of char width/height ratio
         this.mCharAspectRatio = 1;
@@ -88,6 +90,7 @@ function getCharInfo(fontName, aChar) {
 
     // relative character size
     let charWidth = charInfo.getAttribute("xadvance");
+    returnInfo.mXAdvance = charInfo.getAttribute("xadvance") / charWidth;
     returnInfo.mCharWidth = charInfo.getAttribute("width") / charWidth;
     returnInfo.mCharHeight = charInfo.getAttribute("height") / charHeight;
     returnInfo.mCharWidthOffset = charInfo.getAttribute("xoffset") / charWidth;
