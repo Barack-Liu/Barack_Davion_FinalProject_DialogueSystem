@@ -8,6 +8,10 @@
 import DialogueUI from "./dialogue_ui.js";
 import DialogueText from "./dialogue_text.js";
 import engine from "../index.js";
+import { isButtonPressed } from "../input.js";
+
+//Define a const parent node according to the first 'title' element
+const buttonParentNode = document.querySelector('b').parentNode;
 
 class Dialogue {
     constructor(largeBg, avatar, textBg, nameText, dialogueText) {
@@ -70,7 +74,28 @@ class Dialogue {
          this.mDialogueText3 = new engine.FontRenderable(this.kDialogueText);
          this.mDialogueText3.setColor([0.3, 0.6, 0.9, 1]);
          this.mDialogueText3.getXform().setPosition(21, 30);
-         this.mDialogueText3.setTextHeight(3);          
+         this.mDialogueText3.setTextHeight(3);   
+         
+         //Current Number
+         this.mCurrentNumber = 1;
+
+         //Have Option
+         this.mHaveOption = false;
+
+         //Option1
+         this.mOptionText1 = "";
+         this.mOptionNextNumber1 = 2;
+
+         //Option2
+         this.mOptionText2 = "";
+         this.mOptionNextNumber2 = 2;
+         
+         //Option3
+         this.mOptionText3 = "";
+         this.mOptionNextNumber3 = 2; 
+         
+         this.mIsOptionDrawn = false;
+
     }
 
     getXform() { 
@@ -104,7 +129,77 @@ class Dialogue {
             this.mDialogueText1.draw(cam);
             this.mDialogueText2.draw(cam);
             this.mDialogueText3.draw(cam);
+
+            //Draw Button
+            if(this.mHaveOption && (!this.mIsOptionDrawn)){
+                this.drawOption(this.mOptionText1, this.mOptionText2, this.mOptionText3);
+                this.mIsOptionDrawn = true;
+            }
         }
+    }
+
+    drawOption(optTex1, optTex2, optTex3){
+        //Button 1
+        //console.log("button1 = " + n);
+        
+       // if(typeof button1 === 'undefined'){    
+            let button1 = document.createElement('button');
+            button1.textContent = optTex1;
+            button1.setAttribute('id', 'button1');
+            button1.setAttribute('class', 'my-button');
+            button1.style.fontSize = '30px';
+            button1.style.width = '593px';
+            button1.style.height = '100px';
+            button1.style.position = 'absolute';
+            button1.style.left = '593px';
+            button1.style.top = '200px';
+            document.body.appendChild(button1);   
+
+            console.log("Draw option1");
+
+            //Make ParentNode global;
+            window.buttonParentNode1 = document.body;
+            window.button1 = button1;
+       // }
+ 
+        //Button 2
+       // if(typeof button2 === 'undefined'){
+            let button2 = document.createElement('button');
+            button2.textContent = optTex2;
+            button2.setAttribute('id', 'button2');
+            button2.setAttribute('class', 'my-button');
+            button2.style.fontSize = '30px';
+            button2.style.width = '593px';
+            button2.style.height = '100px';
+            button2.style.position = 'absolute';
+            button2.style.left = '593px';
+            button2.style.top = '350px';
+            document.body.appendChild(button2);
+            //buttonParentNode.appendChild(button2);
+
+            //Make ParentNode global;
+            window.button2 = button2;            
+       // }
+
+
+        //Button 3
+      //  if(typeof button3 === 'undefined'){
+            let button3 = document.createElement('button');
+            button3.textContent = optTex3;
+            button3.setAttribute('id', 'button3');
+            button3.setAttribute('class', 'my-button');
+            button3.style.fontSize = '30px';
+            button3.style.width = '593px';
+            button3.style.height = '100px';
+            button3.style.position = 'absolute';
+            button3.style.left = '593px';
+            button3.style.top = '500px';
+            document.body.appendChild(button3);    
+            //buttonParentNode.appendChild(button3);
+
+            //Make ParentNode global;
+            window.button3 = button3;                 
+      //  }       
     }
 
     setLargeBg(larBg){
@@ -159,6 +254,28 @@ class Dialogue {
         this.mDialogueText3.setTextHeight(3);
     }
 
+    setCurrentNumber(curNum){
+        this.mCurrentNumber = curNum;
+    }
+
+    setHaveOption(havOpt){
+        this.mHaveOption = havOpt;
+    }
+
+    setOption1(optTex, optNexNum){
+        this.mOptionText1 = optTex;
+        this.mOptionNextNumber1 = optNexNum;
+    }
+
+    setOption2(optTex, optNexNum){
+        this.mOptionText2 = optTex;
+        this.mOptionNextNumber2 = optNexNum;
+    }
+
+    setOption3(optTex, optNexNum){
+        this.mOptionText3 = optTex;
+        this.mOptionNextNumber3 = optNexNum;
+    }
 }
 
 export default Dialogue;

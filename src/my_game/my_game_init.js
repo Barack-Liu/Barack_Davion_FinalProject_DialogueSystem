@@ -86,7 +86,13 @@ class MyGame extends engine.Scene {
         this.aDialog = null;
         this.mDialog = null;
 
-        window.mIsOptionClicked = false;
+        window.mIsOptionClicked1 = false;
+        window.mIsOptionClicked2 = false;
+        window.mIsOptionClicked3 = false;
+        window.mIsOtherClicked = false;
+
+        //Define a const parent node according to the first 'title' element
+        //const buttonParentNode = document.querySelector('b').parentNode;
     }
 
 
@@ -166,18 +172,44 @@ class MyGame extends engine.Scene {
         // this.mDialog.setName("Pikachu");
         // this.mDialog.setParagraph("Recently, such <#12bcee#>people have been the focal point of a global <#eec812#>conversation. Facebook, for example, <#ee4412#>recently. made its profit after tax the latest line item to be given public <#2f23ab#>attention. The roll-out of a new ad platform meant that businesses have been given control over which users they can serve with the content they want to display.");
 
-        const button1 = document.createElement('button');
-        button1.textContent = 'Jump to P6';
-        button1.setAttribute('id', 'button1');
-        button1.setAttribute('class', 'my-button');
-        button1.style.fontSize = '30px';
-        button1.style.width = '178px';
-        button1.style.height = '100px';
-        button1.style.position = 'absolute';
-        button1.style.left = '800px';
-        button1.style.top = '333px';
-        document.body.appendChild(button1);
-        
+        // //Button 1
+        // const button1 = document.createElement('button');
+        // button1.textContent = 'Jump to P6';
+        // button1.setAttribute('id', 'button1');
+        // button1.setAttribute('class', 'my-button');
+        // button1.style.fontSize = '30px';
+        // button1.style.width = '593px';
+        // button1.style.height = '100px';
+        // button1.style.position = 'absolute';
+        // button1.style.left = '593px';
+        // button1.style.top = '200px';
+        // document.body.appendChild(button1);    
+
+        // //Button 2
+        // const button2 = document.createElement('button');
+        // button2.textContent = 'Jump to P12';
+        // button2.setAttribute('id', 'button2');
+        // button2.setAttribute('class', 'my-button');
+        // button2.style.fontSize = '30px';
+        // button2.style.width = '593px';
+        // button2.style.height = '100px';
+        // button2.style.position = 'absolute';
+        // button2.style.left = '593px';
+        // button2.style.top = '350px';
+        // document.body.appendChild(button2);
+
+        // //Button 3
+        // const button3 = document.createElement('button');
+        // button3.textContent = 'Jump to P18';
+        // button3.setAttribute('id', 'button3');
+        // button3.setAttribute('class', 'my-button');
+        // button3.style.fontSize = '30px';
+        // button3.style.width = '593px';
+        // button3.style.height = '100px';
+        // button3.style.position = 'absolute';
+        // button3.style.left = '593px';
+        // button3.style.top = '500px';
+        // document.body.appendChild(button3);        
     }
 
     _parseDialogues(sceneInfo){
@@ -193,6 +225,15 @@ class MyGame extends engine.Scene {
             dialogueSet[i].setNameBg(sceneInfo.DialogueSet[i].NameBg);
             dialogueSet[i].setNameText(sceneInfo.DialogueSet[i].NameText);
             dialogueSet[i].setDialogueText(sceneInfo.DialogueSet[i].DialogueText[0], sceneInfo.DialogueSet[i].DialogueText[1], sceneInfo.DialogueSet[i].DialogueText[2]);
+
+            dialogueSet[i].setCurrentNumber(sceneInfo.DialogueSet[i].CurrentNumber);
+            dialogueSet[i].setHaveOption(sceneInfo.DialogueSet[i].HaveOption);
+            dialogueSet[i].setOption1(sceneInfo.DialogueSet[i].Option1[0], sceneInfo.DialogueSet[i].Option1[1]);
+            //console.log("i = " + i + " Option1[1] = " + sceneInfo.DialogueSet[i].Option1[1]);
+            //console.log("i = " + i + " mOptionNextNumber1 = " + sceneInfo.DialogueSet[i].mOptionNextNumber1);
+
+            dialogueSet[i].setOption2(sceneInfo.DialogueSet[i].Option2[0], sceneInfo.DialogueSet[i].Option2[1]);
+            dialogueSet[i].setOption3(sceneInfo.DialogueSet[i].Option3[0], sceneInfo.DialogueSet[i].Option3[1]);                        
 
             this.mDialogueSet.push(dialogueSet[i]);
         }

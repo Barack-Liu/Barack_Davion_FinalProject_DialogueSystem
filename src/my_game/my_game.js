@@ -14,3 +14,4 @@ window.onload = function () {
     let myGame = new MyGame();
     myGame.start();
 }
+   
