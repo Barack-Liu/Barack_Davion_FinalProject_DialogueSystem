@@ -28,6 +28,35 @@ class Dialogue {
         this.kDialogueText = dialogueText;
         this.kNameText = nameText;
 
+        //Player's attribute
+        this.kHealth = "Health:";
+        this.kQi = "Qi:";
+        this.kAttack = "Attack:";
+        this.kDefend = "Defend:";  
+
+        this.kHealthValue = 10;
+        this.kQiValue = 1;
+        this.kAttackValue = 1;
+        this.kDefendValue = 1;   
+
+        //Add attribute 1
+        this.kHealthAdd1 = 0;
+        this.kQiAdd1 = 0;
+        this.kAttackAdd1 = 0;
+        this.kDefendAdd1 = 0;           
+
+        //Add attribute 2
+        this.kHealthAdd2 = 0;
+        this.kQiAdd2 = 0;
+        this.kAttackAdd2 = 0;
+        this.kDefendAdd2 = 0; 
+        
+        //Add attribute 3
+        this.kHealthAdd3 = 0;
+        this.kQiAdd3 = 0;
+        this.kAttackAdd3 = 0;
+        this.kDefendAdd3 = 0; 
+
         //Init large bg
         let hLargeBg = new engine.TextureRenderable(this.kLargeBg);
         hLargeBg.getXform().setSize(178, 100);
@@ -94,8 +123,46 @@ class Dialogue {
          this.mOptionText3 = "";
          this.mOptionNextNumber3 = 2; 
          
+         //Check wether option is drawn
          this.mIsOptionDrawn = false;
 
+        //Health
+        this.mHealth = new engine.FontRenderable(this.kHealth);
+        this.mHealth.setColor([0.1, 0.1, 0.1, 1]);
+        this.mHealth.getXform().setPosition(10,95);
+        this.mHealth.setTextHeight(3);     
+        this.mHealth.setText("Health:" + this.kHealthValue);
+
+        //Qi
+        this.mQi = new engine.FontRenderable(this.kQi);
+        this.mQi.setColor([0.1, 0.1, 0.1, 1]);
+        this.mQi.getXform().setPosition(10,90);
+        this.mQi.setTextHeight(3);   
+        this.mQi.setText("Qi:" + this.kQiValue);        
+
+        //Attack
+        this.mAttack = new engine.FontRenderable(this.kAttack);
+        this.mAttack.setColor([0.1, 0.1, 0.1, 1]);
+        this.mAttack.getXform().setPosition(160,95);
+        this.mAttack.setTextHeight(3);     
+        this.mAttack.setText("Attack:" + this.kAttackValue);
+
+        //Defend
+        this.mDefend = new engine.FontRenderable(this.kDefend);
+        this.mDefend.setColor([0.1, 0.1, 0.1, 1]);
+        this.mDefend.getXform().setPosition(160,90);
+        this.mDefend.setTextHeight(3);   
+        this.mDefend.setText("Defend:" + this.kDefendValue); 
+
+        //Effect mode
+        this.mEffectMode1 = 0;
+        this.mEffectMode2 = 0;
+        this.mEffectMode3 = 0;      
+        
+        //Oscillate player
+        this.mOscillatePlayer = null;
+        this.kWidth = 40;
+        this.kHeight = 60;
     }
 
     getXform() { 
@@ -116,7 +183,26 @@ class Dialogue {
 
     update() {
         // simple default behavior
-        let pos = this.getXform().getPosition();
+        //let pos = this.getXform().getPosition();
+
+        //console.log("this.mCurrentNumber:" + (this.mCurrentNumber - 1));
+
+        if(this.mOscillatePlayer !== null){
+            console.log("Start oscillating");
+
+            if(this.mOscillatePlayer.done()){
+                this.stopOscillatePlayer();
+                this.mAvatar.getXform().setSize(this.kWidth, this.kHeight);
+
+                console.log("When done, Avatar size:" + this.mAvatar.getXform().getSize());
+            }
+            else{
+                let s = this.mOscillatePlayer.getNext();
+                this.mAvatar.getXform().setSize(this.kWidth + s[0], this.kHeight + s[1]);
+                
+                console.log("During oscillating, Avatar size:" + this.mAvatar.getXform().getSize());
+            }
+        }
     }
 
     draw(cam) {
@@ -129,6 +215,12 @@ class Dialogue {
             this.mDialogueText1.draw(cam);
             this.mDialogueText2.draw(cam);
             this.mDialogueText3.draw(cam);
+
+            //Player's attribute
+            // this.mHealth.draw(cam);
+            // this.mQi.draw(cam);
+            // this.mAttack.draw(cam);
+            // this.mDefend.draw(cam);
 
             //Draw Button
             if(this.mHaveOption && (!this.mIsOptionDrawn)){
@@ -262,20 +354,56 @@ class Dialogue {
         this.mHaveOption = havOpt;
     }
 
-    setOption1(optTex, optNexNum){
+    setOption1(optTex, optNexNum, addHea, addQi, addAtt, addDef, effMod){
         this.mOptionText1 = optTex;
         this.mOptionNextNumber1 = optNexNum;
+        
+        this.kHealthAdd1 = addHea;
+        this.kQiAdd1 = addQi;
+        this.kAttackAdd1 = addAtt;
+        this.kDefendAdd1 = addDef;
+        
+        this.mEffectMode1 = effMod;
     }
 
-    setOption2(optTex, optNexNum){
+    setOption2(optTex, optNexNum, addHea, addQi, addAtt, addDef, effMod){
         this.mOptionText2 = optTex;
         this.mOptionNextNumber2 = optNexNum;
+
+        this.kHealthAdd2 = addHea;
+        this.kQiAdd2 = addQi;
+        this.kAttackAdd2 = addAtt;
+        this.kDefendAdd2 = addDef;    
+
+        this.mEffectMode2 = effMod;
     }
 
-    setOption3(optTex, optNexNum){
+    setOption3(optTex, optNexNum, addHea, addQi, addAtt, addDef, effMod){
         this.mOptionText3 = optTex;
         this.mOptionNextNumber3 = optNexNum;
+
+        this.kHealthAdd3 = addHea;
+        this.kQiAdd3 = addQi;
+        this.kAttackAdd3 = addAtt;
+        this.kDefendAdd3 = addDef;      
+
+        this.mEffectMode3 = effMod;
     }
+
+    //Oscillate player
+    oscillatePlayer(){
+        if(this.mOscillatePlayer == null){
+            this.mOscillatePlayer = new engine.Oscillate.OscillatePosition(20, 30, 4, 180);            
+        }
+    }
+
+    stopOscillatePlayer(){
+        this.mOscillatePlayer = null;
+    }
+    
+    //Oscillate the position of enermy
+
+    //Oscillate the size of enermy
 }
 
 export default Dialogue;

@@ -2,17 +2,17 @@
     "DialogueSet":
     [
         {
-            "LargeBg": "assets/bg_1.png",
-            "Avatar": "assets/transparency.png",
+            "LargeBg": "assets/transparency.png",
+            "Avatar": "assets/avatar_1.png",
             "TextBg": "assets/dialogueFrame_1.png",
             "NameBg": "assets/dialogueFrame_1.png",
             "NameText": "You",
             "DialogueText": ["Where am I?", "", ""],
             "CurrentNumber": 1,
             "HaveOption": false,
-            "Option1": ["", 0],
-            "Option2": ["", 0],
-            "Option3": ["", 0]
+            "Option1": ["", 0, 0, 0, 0, 0, 0],
+            "Option2": ["", 0, 0, 0, 0, 0, 0],
+            "Option3": ["", 0, 0, 0, 0, 0, 0]
         },
         {
             "LargeBg": "assets/bg_1.png",
@@ -23,9 +23,9 @@
             "DialogueText": ["I'm doing CSS 452 Progress Demo just one second ago!", "", ""],
             "CurrentNumber": 2,
             "HaveOption": true,
-            "Option1": ["Jump to P4", 4],
-            "Option2": ["Jump to P6", 6],
-            "Option3": ["Jump to P8", 8]
+            "Option1": ["Jump to P4", 4, 10, 0, 0, 0, 1],
+            "Option2": ["Jump to P6", 6, 0, 1, 0, 0, 1],
+            "Option3": ["Jump to P8", 8, 0, 0, 1, 0, 1]
         },
         {
             "LargeBg": "assets/bg_1.png",
@@ -36,9 +36,9 @@
             "DialogueText": ["Kelvin will kill me if I fail to finish the presentation!", "", ""],
             "CurrentNumber": 3,
             "HaveOption": false,
-            "Option1": ["", 0],
-            "Option2": ["", 0],
-            "Option3": ["", 0]
+            "Option1": ["", 0, 0, 0, 0, 0, 0],
+            "Option2": ["", 0, 0, 0, 0, 0, 0],
+            "Option3": ["", 0, 0, 0, 0, 0, 0]
         },
         {
             "LargeBg": "assets/bg_1.png",
@@ -49,9 +49,9 @@
             "DialogueText": ["Hi, fresheman, no need for panic.", "", ""],
             "CurrentNumber": 4,
             "HaveOption": false,
-            "Option1": ["", 0],
-            "Option2": ["", 0],
-            "Option3": ["", 0]
+            "Option1": ["", 0, 0, 0, 0, 0, 0],
+            "Option2": ["", 0, 0, 0, 0, 0, 0],
+            "Option3": ["", 0, 0, 0, 0, 0, 0]
         },
         {
             "LargeBg": "assets/bg_1.png",
@@ -62,9 +62,9 @@
             "DialogueText": ["Welcome to the College of Fighting.", "I'm your academic advisor, Kid.", ""],
             "CurrentNumber": 5,
             "HaveOption": false,
-            "Option1": ["", 0],
-            "Option2": ["", 0],
-            "Option3": ["", 0]
+            "Option1": ["", 0, 0, 0, 0, 0, 0],
+            "Option2": ["", 0, 0, 0, 0, 0, 0],
+            "Option3": ["", 0, 0, 0, 0, 0, 0]
         },
         {
             "LargeBg": "assets/bg_1.png",
@@ -75,9 +75,9 @@
             "DialogueText": ["For some reason, you've fallen into the world of Qi.", "In our world, the stronger your Qi is, the more powerful you are.", "Since I'm quitely busy, now I'll hand you over to your mentor, Didi."],
             "CurrentNumber": 6,
             "HaveOption": false,
-            "Option1": ["", 0],
-            "Option2": ["", 0],
-            "Option3": ["", 0]
+            "Option1": ["", 0, 0, 0, 0, 0, 0],
+            "Option2": ["", 0, 0, 0, 0, 0, 0],
+            "Option3": ["", 0, 0, 0, 0, 0, 0]
         },
         {
             "LargeBg": "assets/bg_2.png",
@@ -88,22 +88,22 @@
             "DialogueText": ["", "", ""],
             "CurrentNumber": 7,
             "HaveOption": false,
-            "Option1": ["", 0],
-            "Option2": ["", 0],
-            "Option3": ["", 0]
+            "Option1": ["", 0, 0, 0, 0, 0, 0],
+            "Option2": ["", 0, 0, 0, 0, 0, 0],
+            "Option3": ["", 0, 0, 0, 0, 0, 0]
         },
         {
             "LargeBg": "assets/bg_2.png",
-            "Avatar": "assets/transparency.png",
+            "Avatar": "assets/avatar_2.png",
             "TextBg": "assets/dialogueFrame_1.png",
             "NameBg": "assets/dialogueFrame_1.png",
             "NameText": "You",
             "DialogueText": ["Are you kidding?", "How can I enter a new college when I even haven't graduated from UW!", ""],
             "CurrentNumber": 8,
             "HaveOption": false,
-            "Option1": ["", 0],
-            "Option2": ["", 0],
-            "Option3": ["", 0]
+            "Option1": ["", 0, 0, 0, 0, 0, 0],
+            "Option2": ["", 0, 0, 0, 0, 0, 0],
+            "Option3": ["", 0, 0, 0, 0, 0, 0]
         },
         {
             "LargeBg": "assets/bg_2.png",
@@ -114,9 +114,9 @@
             "DialogueText": ["I have no interests to learn Qi!", "Microsoft won't hire me for that stupid Qi!", ""],
             "CurrentNumber": 9,
             "HaveOption": false,
-            "Option1": ["", 0],
-            "Option2": ["", 0],
-            "Option3": ["", 0]
+            "Option1": ["", 0, 0, 0, 0, 0, 0],
+            "Option2": ["", 0, 0, 0, 0, 0, 0],
+            "Option3": ["", 0, 0, 0, 0, 0, 0]
         },
         {
             "LargeBg": "assets/bg_2.png",
@@ -127,9 +127,9 @@
             "DialogueText": ["Wait, don't go, Kid!", "Get me back to my world!", ""],
             "CurrentNumber": 10,
             "HaveOption": true,
-            "Option1": ["Jump to P12", 12],
-            "Option2": ["Jump to P14", 14],
-            "Option3": ["Jump to P16", 16]
+            "Option1": ["Jump to P12", 12, 10, 1, 0, 0, 1],
+            "Option2": ["Jump to P14", 14, 0, 1, 1, 0, 1],
+            "Option3": ["Jump to P16", 16, 0, 0, 1, 1, 1]
         },
         {
             "LargeBg": "assets/bg_2.png",
@@ -140,9 +140,9 @@
             "DialogueText": ["Calm down, young.", "I'm Didi, the dean of Department of Water in the College of Fighting.", "You should feel lucky because you're the only human student for past 1,000 years."],
             "CurrentNumber": 11,
             "HaveOption": false,
-            "Option1": ["", 0],
-            "Option2": ["", 0],
-            "Option3": ["", 0]
+            "Option1": ["", 0, 0, 0, 0, 0, 0],
+            "Option2": ["", 0, 0, 0, 0, 0, 0],
+            "Option3": ["", 0, 0, 0, 0, 0, 0]
         },
         {
             "LargeBg": "assets/bg_2.png",
@@ -153,9 +153,9 @@
             "DialogueText": ["In the world of Qi, Qi can be divided into five categories.", "Metal. Wood. Water. Fire. Earth.", ""],
             "CurrentNumber": 12,
             "HaveOption": false,
-            "Option1": ["", 0],
-            "Option2": ["", 0],
-            "Option3": ["", 0]
+            "Option1": ["", 0, 0, 0, 0, 0, 0],
+            "Option2": ["", 0, 0, 0, 0, 0, 0],
+            "Option3": ["", 0, 0, 0, 0, 0, 0]
         },
         {
             "LargeBg": "assets/bg_2.png",
@@ -166,9 +166,9 @@
             "DialogueText": ["I will teach you more about Qi, but before that, let me give you my first gift.", "", ""],
             "CurrentNumber": 13,
             "HaveOption": false,
-            "Option1": ["", 0],
-            "Option2": ["", 0],
-            "Option3": ["", 0]
+            "Option1": ["", 0, 0, 0, 0, 0, 0],
+            "Option2": ["", 0, 0, 0, 0, 0, 0],
+            "Option3": ["", 0, 0, 0, 0, 0, 0]
         },
         {
             "LargeBg": "assets/bg_3.png",
@@ -179,9 +179,9 @@
             "DialogueText": ["", "", ""],
             "CurrentNumber": 14,
             "HaveOption": false,
-            "Option1": ["", 0],
-            "Option2": ["", 0],
-            "Option3": ["", 0]
+            "Option1": ["", 0, 0, 0, 0, 0, 0],
+            "Option2": ["", 0, 0, 0, 0, 0, 0],
+            "Option3": ["", 0, 0, 0, 0, 0, 0]
         },
         {
             "LargeBg": "assets/bg_3.png",
@@ -192,9 +192,9 @@
             "DialogueText": ["Uhhh, she is really beatiful.", "I will definitely be a Straight A student if she was my mentor before.", "Emmm, maybe I can consider staying here a little longer..."],
             "CurrentNumber": 15,
             "HaveOption": false,
-            "Option1": ["", 0],
-            "Option2": ["", 0],
-            "Option3": ["", 0]
+            "Option1": ["", 0, 0, 0, 0, 0, 0],
+            "Option2": ["", 0, 0, 0, 0, 0, 0],
+            "Option3": ["", 0, 0, 0, 0, 0, 0]
         },
         {
             "LargeBg": "assets/bg_3.png",
@@ -205,9 +205,9 @@
             "DialogueText": ["Qi?", "Sounds like some primitive element of this world.", "Maybe I can utilize it to go back to my world if I can master it."],
             "CurrentNumber": 16,
             "HaveOption": false,
-            "Option1": ["", 0],
-            "Option2": ["", 0],
-            "Option3": ["", 0]
+            "Option1": ["", 0, 0, 0, 0, 0, 0],
+            "Option2": ["", 0, 0, 0, 0, 0, 0],
+            "Option3": ["", 0, 0, 0, 0, 0, 0]
         },
         {
             "LargeBg": "assets/bg_3.png",
@@ -218,9 +218,9 @@
             "DialogueText": ["She meantion gift?", "A china? Or a gun?", "Let me see..."],
             "CurrentNumber": 17,
             "HaveOption": false,
-            "Option1": ["", 0],
-            "Option2": ["", 0],
-            "Option3": ["", 0]
+            "Option1": ["", 0, 0, 0, 0, 0, 0],
+            "Option2": ["", 0, 0, 0, 0, 0, 0],
+            "Option3": ["", 0, 0, 0, 0, 0, 0]
         },
         {
             "LargeBg": "assets/bg_3.png",
@@ -231,9 +231,9 @@
             "DialogueText": ["Pika! Pika!", "My name is Pikachu and I've followed Professor Didi for more than 300 years.", "Do you want to become my partner?"],
             "CurrentNumber": 18,
             "HaveOption": true,
-            "Option1": ["Jump to P20", 20],
-            "Option2": ["Jump to P22", 22],
-            "Option3": ["Jump to P24", 24]
+            "Option1": ["Jump to P20", 20, 10, 1, 1, 0, 1],
+            "Option2": ["Jump to P22", 22, 0, 1, 1, 1, 1],
+            "Option3": ["Jump to P24", 24, 10, 0, 1, 1, 1]
         },
         {
             "LargeBg": "assets/bg_3.png",
@@ -244,9 +244,9 @@
             "DialogueText": ["I'm really bored with the normal life.", "Silence means yes, and now you're the first partner in my life.", "Actually, you're the weakest student I've seen. Who knows why you're chosen..."],
             "CurrentNumber": 19,
             "HaveOption": false,
-            "Option1": ["", 0],
-            "Option2": ["", 0],
-            "Option3": ["", 0]
+            "Option1": ["", 0, 0, 0, 0, 0, 0],
+            "Option2": ["", 0, 0, 0, 0, 0, 0],
+            "Option3": ["", 0, 0, 0, 0, 0, 0]
         },
         {
             "LargeBg": "assets/bg_3.png",
@@ -257,9 +257,9 @@
             "DialogueText": ["But no worries.", "As the descendant of epic creature, I'll help you to grow into King of Qi.", "It's time for me to go for my 9th meal today, see you later."],
             "CurrentNumber": 20,
             "HaveOption": false,
-            "Option1": ["", 0],
-            "Option2": ["", 0],
-            "Option3": ["", 0]
+            "Option1": ["", 0, 0, 0, 0, 0, 0],
+            "Option2": ["", 0, 0, 0, 0, 0, 0],
+            "Option3": ["", 0, 0, 0, 0, 0, 0]
         },
         {
             "LargeBg": "assets/bg_1.png",
@@ -270,9 +270,9 @@
             "DialogueText": ["", "", ""],
             "CurrentNumber": 21,
             "HaveOption": false,
-            "Option1": ["", 0],
-            "Option2": ["", 0],
-            "Option3": ["", 0]
+            "Option1": ["", 0, 0, 0, 0, 0, 0],
+            "Option2": ["", 0, 0, 0, 0, 0, 0],
+            "Option3": ["", 0, 0, 0, 0, 0, 0]
         },
         {
             "LargeBg": "assets/bg_1.png",
@@ -283,9 +283,9 @@
             "DialogueText": ["Emm, he is cute.", "Maybe I can learn more about this world and so-called Qi from him later.", "But he looks far more powerful than me, what if he bites me..."],
             "CurrentNumber": 22,
             "HaveOption": false,
-            "Option1": ["", 0],
-            "Option2": ["", 0],
-            "Option3": ["", 0]
+            "Option1": ["", 0, 0, 0, 0, 0, 0],
+            "Option2": ["", 0, 0, 0, 0, 0, 0],
+            "Option3": ["", 0, 0, 0, 0, 0, 0]
         },
         {
             "LargeBg": "assets/bg_1.png",
@@ -296,9 +296,9 @@
             "DialogueText": ["Pikachu?", "Sounds really familiar...", "Some of my memory seems to be lost."],
             "CurrentNumber": 23,
             "HaveOption": false,
-            "Option1": ["", 0],
-            "Option2": ["", 0],
-            "Option3": ["", 0]
+            "Option1": ["", 0, 0, 0, 0, 0, 0],
+            "Option2": ["", 0, 0, 0, 0, 0, 0],
+            "Option3": ["", 0, 0, 0, 0, 0, 0]
         },
         {
             "LargeBg": "assets/bg_1.png",
@@ -309,9 +309,9 @@
             "DialogueText": ["Anyway, cheers up, the most handsome guy in UW.", "I believe nothing is tougher than Kelvin's MP.", "Let me start the new miraculous journey!"],
             "CurrentNumber": 24,
             "HaveOption": false,
-            "Option1": ["", 0],
-            "Option2": ["", 0],
-            "Option3": ["", 0]
+            "Option1": ["", 0, 0, 0, 0, 0, 0],
+            "Option2": ["", 0, 0, 0, 0, 0, 0],
+            "Option3": ["", 0, 0, 0, 0, 0, 0]
         }
     ]
 }

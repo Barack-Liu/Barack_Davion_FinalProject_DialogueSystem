@@ -16,7 +16,15 @@ MyGame.prototype.drawWorld = function(cam) {
         //Draw all available dialogue
         for(let i = 0; i < this.mDialogueSet.length; i++){
             if(this.mDialogueSet[i].mVisible){
-                this.mDialogueSet[i].draw(cam); 
+                this.mDialogueSet[i].draw(cam);
+                
+                //console.log("Draw:" + i + "Size:" + this.mDialogueSet[i].mAvatar.getXform().getSize());
+
+                //Player's attribute
+                this.mHealth.draw(cam);
+                this.mQi.draw(cam);
+                this.mAttack.draw(cam);
+                this.mDefend.draw(cam);                
             }
         }
 }

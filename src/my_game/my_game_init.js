@@ -82,10 +82,10 @@ class MyGame extends engine.Scene {
         //Init dialogue system set
         this.mDialogueSet = [];
     
-    
         this.aDialog = null;
         this.mDialog = null;
 
+        //Check which option is clicked
         window.mIsOptionClicked1 = false;
         window.mIsOptionClicked2 = false;
         window.mIsOptionClicked3 = false;
@@ -93,6 +93,41 @@ class MyGame extends engine.Scene {
 
         //Define a const parent node according to the first 'title' element
         //const buttonParentNode = document.querySelector('b').parentNode;
+
+        //Define player's attributes
+        this.mHealth = 10;
+        this.mQi = 1;
+        this.mAttack = 1;
+        this.mDefend = 1;
+
+        //Player's attribute
+        this.kHealth = "Health:";
+        this.kQi = "Qi:";
+        this.kAttack = "Attack:";
+        this.kDefend = "Defend:";  
+
+        this.kHealthValue = 10;
+        this.kQiValue = 1;
+        this.kAttackValue = 1;
+        this.kDefendValue = 1;   
+
+        //Add attribute 1
+        this.kHealthAdd1 = 0;
+        this.kQiAdd1 = 0;
+        this.kAttackAdd1 = 0;
+        this.kDefendAdd1 = 0;           
+
+        //Add attribute 2
+        this.kHealthAdd2 = 0;
+        this.kQiAdd2 = 0;
+        this.kAttackAdd2 = 0;
+        this.kDefendAdd2 = 0; 
+        
+        //Add attribute 3
+        this.kHealthAdd3 = 0;
+        this.kQiAdd3 = 0;
+        this.kAttackAdd3 = 0;
+        this.kDefendAdd3 = 0;         
     }
 
 
@@ -159,10 +194,43 @@ class MyGame extends engine.Scene {
         bgR.getXform().setSize(178, 100);
         bgR.getXform().setPosition(89, 50);
         this.mBg = new engine.GameObject(bgR);
+
+        //Health
+        this.mHealth = new engine.FontRenderable(this.kHealth);
+        this.mHealth.setColor([1, 0, 0, 1]);
+        this.mHealth.getXform().setPosition(10,95);
+        this.mHealth.setTextHeight(3);     
+        this.mHealth.setText("Health:" + this.kHealthValue);
+
+        //Qi
+        this.mQi = new engine.FontRenderable(this.kQi);
+        this.mQi.setColor([1, 0, 0, 1]);
+        this.mQi.getXform().setPosition(10,90);
+        this.mQi.setTextHeight(3);   
+        this.mQi.setText("Qi:" + this.kQiValue);        
+
+        //Attack
+        this.mAttack = new engine.FontRenderable(this.kAttack);
+        this.mAttack.setColor([1, 0, 0, 1]);
+        this.mAttack.getXform().setPosition(160,95);
+        this.mAttack.setTextHeight(3);     
+        this.mAttack.setText("Attack:" + this.kAttackValue);
+
+        //Defend
+        this.mDefend = new engine.FontRenderable(this.kDefend);
+        this.mDefend.setColor([1, 0, 0, 1]);
+        this.mDefend.getXform().setPosition(160,90);
+        this.mDefend.setTextHeight(3);   
+        this.mDefend.setText("Defend:" + this.kDefendValue);         
         
         //Parse Json
         let sceneInfo = engine.json.get(this.kJSONSceneFile);
         this._parseDialogues(sceneInfo);
+
+        //Test oscillating
+        // this.mDialogueSet[0].oscillatePlayer();
+        // this.mDialogueSet[1].oscillatePlayer();
+        // this.mDialogueSet[2].oscillatePlayer();
 
         //User case of Class Dialog
         // this.mDialog = new engine.Dialog();
@@ -228,14 +296,16 @@ class MyGame extends engine.Scene {
 
             dialogueSet[i].setCurrentNumber(sceneInfo.DialogueSet[i].CurrentNumber);
             dialogueSet[i].setHaveOption(sceneInfo.DialogueSet[i].HaveOption);
-            dialogueSet[i].setOption1(sceneInfo.DialogueSet[i].Option1[0], sceneInfo.DialogueSet[i].Option1[1]);
-            //console.log("i = " + i + " Option1[1] = " + sceneInfo.DialogueSet[i].Option1[1]);
-            //console.log("i = " + i + " mOptionNextNumber1 = " + sceneInfo.DialogueSet[i].mOptionNextNumber1);
+            dialogueSet[i].setOption1(sceneInfo.DialogueSet[i].Option1[0], sceneInfo.DialogueSet[i].Option1[1], sceneInfo.DialogueSet[i].Option1[2], sceneInfo.DialogueSet[i].Option1[3], sceneInfo.DialogueSet[i].Option1[4], sceneInfo.DialogueSet[i].Option1[5], sceneInfo.DialogueSet[i].Option1[6]);
+            dialogueSet[i].setOption2(sceneInfo.DialogueSet[i].Option2[0], sceneInfo.DialogueSet[i].Option2[1], sceneInfo.DialogueSet[i].Option2[2], sceneInfo.DialogueSet[i].Option2[3], sceneInfo.DialogueSet[i].Option2[4], sceneInfo.DialogueSet[i].Option2[5], sceneInfo.DialogueSet[i].Option2[6]);
+            dialogueSet[i].setOption3(sceneInfo.DialogueSet[i].Option3[0], sceneInfo.DialogueSet[i].Option3[1], sceneInfo.DialogueSet[i].Option3[2], sceneInfo.DialogueSet[i].Option3[3], sceneInfo.DialogueSet[i].Option3[4], sceneInfo.DialogueSet[i].Option3[5],  sceneInfo.DialogueSet[i].Option3[6]);
 
-            dialogueSet[i].setOption2(sceneInfo.DialogueSet[i].Option2[0], sceneInfo.DialogueSet[i].Option2[1]);
-            dialogueSet[i].setOption3(sceneInfo.DialogueSet[i].Option3[0], sceneInfo.DialogueSet[i].Option3[1]);                        
+            // dialogueSet[i].setAttribute(sceneInfo.DialogueSet[i].AddAttribute[0], sceneInfo.DialogueSet[i].AddAttribute[1], sceneInfo.DialogueSet[i].Attribute[2], sceneInfo.DialogueSet[i].Attribute[3]);
 
+            //Add the dialogue into the dialogue set
             this.mDialogueSet.push(dialogueSet[i]);
+
+            console.log("dialogueSet" + i + ":" + dialogueSet[i].mEffectMode1);
         }
     }
 }

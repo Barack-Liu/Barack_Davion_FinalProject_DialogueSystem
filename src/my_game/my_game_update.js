@@ -13,6 +13,11 @@ import MyGame from "./my_game_draw.js";
 MyGame.prototype.update = function () {
     //Left mouse botton click
 
+    //Update dialogue
+    for(let i = 0; i < this.mDialogueSet.length; i++){
+        this.mDialogueSet[i].update();
+    }
+
     //Update for Class Dialog
     //this.mDialog.update();
 
@@ -100,8 +105,40 @@ MyGame.prototype.update = function () {
     if(window.mIsOptionClicked1){
         //console.log("mCounter = " + (this.mCounter - 1));
         this.mDialogueSet[this.mCounter].mVisible = false;
+
+        //console.log("this.kHealthValue:" + this.kHealthValue);
+
+        //Update health
+        this.kHealthValue += this.mDialogueSet[this.mCounter - 1].kHealthAdd1;
+        this.mHealth.setText("Health:" + this.kHealthValue);
+
+        //Update Qi
+        this.kQiValue += this.mDialogueSet[this.mCounter - 1].kQiAdd1;
+        this.mQi.setText("Qi:" + this.kQiValue);        
+
+        //Update Attack
+        this.kAttackValue += this.mDialogueSet[this.mCounter - 1].kAttackAdd1;
+        this.mAttack.setText("Attack:" + this.kAttackValue);   
+        
+        //Update Defend
+        this.kDefendValue += this.mDialogueSet[this.mCounter - 1].kDefendAdd1;
+        this.mDefend.setText("Defend:" + this.kDefendValue);           
+
+        //console.log("this.mDialogueSet[this.mCounter - 1].kHealthAdd1:" + this.mDialogueSet[this.mCounter - 1].kHealthAdd1);
+        //console.log("this.kHealthValue:" + this.kHealthValue);
+
+        //Effect mode 1
+        if(this.mDialogueSet[this.mCounter - 1].mEffectMode1 == 1){
+            this.mDialogueSet[this.mDialogueSet[this.mCounter - 1].mOptionNextNumber1 - 1].oscillatePlayer();
+
+            console.log("i=" + (this.mDialogueSet[this.mCounter - 1].mOptionNextNumber1 - 1) + "mOscillatePlayer=" + this.mDialogueSet[this.mDialogueSet[this.mCounter - 1].mOptionNextNumber1 - 1].mOscillatePlayer);
+        }
+
+        //Go to next page
         this.mCounter = this.mDialogueSet[this.mCounter - 1].mOptionNextNumber1 - 1;
+
         this.mDialogueSet[this.mCounter].mVisible = true;
+        
         
         //console.log("mOptionNextNum1 = " + this.mDialogueSet[this.mCounter - 1].mOptionNextNumber1);
         window.mIsOptionClicked1 = false;
@@ -110,6 +147,29 @@ MyGame.prototype.update = function () {
     //When mIsOptionClicked2 is true, play certain dialogue
     if(window.mIsOptionClicked2){
         this.mDialogueSet[this.mCounter].mVisible = false;
+
+        //Update health
+        this.kHealthValue += this.mDialogueSet[this.mCounter - 1].kHealthAdd2;
+        this.mHealth.setText("Health:" + this.kHealthValue);
+
+        //Update Qi
+        this.kQiValue += this.mDialogueSet[this.mCounter - 1].kQiAdd2;
+        this.mQi.setText("Qi:" + this.kQiValue);        
+
+        //Update Attack
+        this.kAttackValue += this.mDialogueSet[this.mCounter - 1].kAttackAdd2;
+        this.mAttack.setText("Attack:" + this.kAttackValue);   
+        
+        //Update Defend
+        this.kDefendValue += this.mDialogueSet[this.mCounter - 1].kDefendAdd2;
+        this.mDefend.setText("Defend:" + this.kDefendValue);   
+
+        //Effect mode 1
+        if(this.mDialogueSet[this.mCounter - 1].mEffectMode2 == 1){
+            this.mDialogueSet[this.mDialogueSet[this.mCounter - 1].mOptionNextNumber2 - 1].oscillatePlayer();
+        }
+
+        //Update next slide
         this.mCounter = this.mDialogueSet[this.mCounter - 1].mOptionNextNumber2 - 1;
         //console.log("mOptionNextNumber2 = " + this.mDialogueSet[this.mCounter - 1].mOptionNextNumber2);
         this.mDialogueSet[this.mCounter].mVisible = true;
@@ -120,6 +180,29 @@ MyGame.prototype.update = function () {
     //When mIsOptionClicked3 is true, play certain dialogue
     if(window.mIsOptionClicked3){
         this.mDialogueSet[this.mCounter].mVisible = false;
+        
+        //Update health
+        this.kHealthValue += this.mDialogueSet[this.mCounter - 1].kHealthAdd3;
+        this.mHealth.setText("Health:" + this.kHealthValue);
+
+        //Update Qi
+        this.kQiValue += this.mDialogueSet[this.mCounter - 1].kQiAdd3;
+        this.mQi.setText("Qi:" + this.kQiValue);        
+
+        //Update Attack
+        this.kAttackValue += this.mDialogueSet[this.mCounter - 1].kAttackAdd3;
+        this.mAttack.setText("Attack:" + this.kAttackValue);   
+        
+        //Update Defend
+        this.kDefendValue += this.mDialogueSet[this.mCounter - 1].kDefendAdd3;
+        this.mDefend.setText("Defend:" + this.kDefendValue);           
+
+        //Effect mode 1
+        if(this.mDialogueSet[this.mCounter - 1].mEffectMode3 == 1){
+            this.mDialogueSet[this.mDialogueSet[this.mCounter - 1].mOptionNextNumber3 - 1].oscillatePlayer();
+        }
+
+        //Update next slide
         this.mCounter = this.mDialogueSet[this.mCounter - 1].mOptionNextNumber3 - 1;
         this.mDialogueSet[this.mCounter].mVisible = true;
         //console.log("mOptionNextNum3 = " + this.mDialogueSet[this.mCounter - 1].mOptionNextNumber3);
@@ -139,6 +222,7 @@ MyGame.prototype.update = function () {
 
         window.mIsOtherClicked = false;
     }
+
 
     //console.log("window.mIsOptionClicked = " + window.mIsOptionClicked);
    
