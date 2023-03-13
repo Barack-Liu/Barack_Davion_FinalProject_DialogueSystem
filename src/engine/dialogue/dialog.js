@@ -8,6 +8,7 @@ class Dialog {
         this.mNameRenderable = null;
         this.mAvatar = null;
         this.mTextRenderable = null;
+        this.mNextDialog = null;
     }
 
     init(center, width, btlCorner, rw, rh) {
