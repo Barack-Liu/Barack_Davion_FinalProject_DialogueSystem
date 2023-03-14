@@ -160,7 +160,8 @@ class MyGame extends engine.Scene {
         this.mDialog.init([50, 20], 100, [120, 20], 1500, 300);
         this.mDialog.setBackgroundTexture(this.kTextBg2);
         this.mDialog.setAvatar(this.kAvatar3);
-        this.mDialog.setName("Pikachu");
+        this.mDialog.setName("Pikachu", 10);
+        this.mDialog.setNameTexture(this.kTextBg2);
         this.mDialog.setParagraph("Recently, such <#12bcee#>people have been the focal point of a global <#eec812#>conversation. Facebook, for example, <#ee4412#>recently. made its profit after tax the latest line item to be given public <#2f23ab#>attention. The roll-out of a new ad platform meant that businesses have been given control over which users they can serve with the content they want to display.");
     }
 

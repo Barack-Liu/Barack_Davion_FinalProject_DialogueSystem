@@ -5,6 +5,7 @@ class Dialog {
         this.mDialogCam = null;
         this.mCamBg = null;
         this.mNameCam = null;
+        this.mNameBg = null;
         this.mNameRenderable = null;
         this.mAvatar = null;
         this.mTextRenderable = null;
@@ -35,6 +36,7 @@ class Dialog {
         this.mTextRenderable.draw(this.mDialogCam);
 
         this.mNameCam.setViewAndCameraMatrix();
+        this.mNameBg.draw(this.mNameCam);
         this.mNameRenderable.draw(this.mNameCam);
     }
 
@@ -55,19 +57,25 @@ class Dialog {
         this.mNameRenderable.setColor([1, 1, 1, 1]);
         this.mNameRenderable.getXform().setPosition(0, 0);
         let w = this.mNameRenderable.getStringWidth();
+        let wid = this.mDialogCam.getWCWidth();
         
         let vp = this.mDialogCam.getViewport();
-        let ratio = 1;
+        let px = 200;
         let btltX = vp[0], btltY = vp[1] + vp[3] + gap;
-        console.log(w);
+        console.log(px / (vp[2] / wid), vp[2] / wid);
+        console.log(w, btltX, btltY);
         this.mNameCam = new engine.Camera( 
             vec2.fromValues(0, 0),
-            w+4,                       
-            [500, 900, 100, 2*ratio]           
+            px / (vp[2] / wid),
+            [btltX, btltY, px, 80]
         );
         this.mNameCam.setBackgroundColor[0, 0, 0, 1];
-        
-        
+    }
+
+    setNameTexture(tex) {
+        this.mNameBg = new engine.TextureRenderable(tex);
+        this.mNameBg.getXform().setPosition(this.mNameCam.getWCCenter()[0], this.mNameCam.getWCCenter()[1]);
+        this.mNameBg.getXform().setSize(this.mNameCam.getWCWidth(), this.mNameCam.getWCHeight());
     }
 
     setBackgroundTexture(bgTex) {
@@ -75,6 +83,8 @@ class Dialog {
         this.mCamBg.getXform().setPosition(this.mDialogCam.getWCCenter()[0], this.mDialogCam.getWCCenter()[1]);
         this.mCamBg.getXform().setSize(this.mDialogCam.getWCWidth(), this.mDialogCam.getWCHeight());
     }
+
+    
     
     setParagraph(p) {
         this.mTextRenderable = new engine.ParagraphRenderable(p);
