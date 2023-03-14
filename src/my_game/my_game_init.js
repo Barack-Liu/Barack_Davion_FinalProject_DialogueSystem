@@ -39,6 +39,7 @@ class MyGame extends engine.Scene {
        this.kDialogueText3 = "Do you want to be my master?";          
 
         this.kJSONSceneFile = "./assets/The_Miraculous_Journey_of_a_Adventurer.json";
+        this.kTestJson = "./assets/Test.json";
 
         // Init main camera
         this.mCamera = null;
@@ -81,10 +82,18 @@ class MyGame extends engine.Scene {
 
         //Init dialogue system set
         this.mDialogueSet = [];
-    
-    
-        this.aDialog = null;
-        this.mDialog = null;
+        this.mDialogSet = [];
+        this.mCurDialog = null;
+        this.mOptionSet = [];
+        this.mOption = null;
+        
+        this.mAttack = null;
+        this.mDefend = null;
+        this.mHealth = null;
+        this.mQi = null;
+        this.mPropertyAttribute = [];
+        this.mProperty = [];
+        this.mPropertyRenderable = [];
     }
 
 
@@ -106,7 +115,7 @@ class MyGame extends engine.Scene {
 
         //Load Json file
         engine.json.load(this.kJSONSceneFile);
-
+        engine.json.load(this.kTestJson);
         //Load transparency
         engine.texture.load(this.kTrans);
     }
@@ -129,6 +138,7 @@ class MyGame extends engine.Scene {
 
         //Unload Json
         engine.json.unload(this.kJSONSceneFile);
+        engine.json.unload(this.kTestJson);
 
         //Unload transparency
         engine.json.unload(this.kTrans);
@@ -153,35 +163,97 @@ class MyGame extends engine.Scene {
         this.mBg = new engine.GameObject(bgR);
         
         //Parse Json
-        let sceneInfo = engine.json.get(this.kJSONSceneFile);
-        this._parseDialogues(sceneInfo);
+        // let sceneInfo = engine.json.get(this.kJSONSceneFile);
+        let sceneFile = engine.json.get(this.kTestJson);
+        // this._parseDialogues(sceneInfo);
+        
+        this._parseScene(sceneFile);
+        this.mCurDialog = 0;
 
-        this.mDialog = new engine.Dialog();
-        this.mDialog.init([50, 20], 100, [120, 20], 1500, 300);
-        this.mDialog.setBackgroundTexture(this.kTextBg2);
-        this.mDialog.setAvatar(this.kAvatar3);
-        this.mDialog.setName("Pikachu", 10);
-        this.mDialog.setNameTexture(this.kTextBg2);
-        this.mDialog.setParagraph("Recently, such <#12bcee#>people have been the focal point of a global <#eec812#>conversation. Facebook, for example, <#ee4412#>recently. made its profit after tax the latest line item to be given public <#2f23ab#>attention. The roll-out of a new ad platform meant that businesses have been given control over which users they can serve with the content they want to display.");
     }
 
-    _parseDialogues(sceneInfo){
-        let i;
-        let dialogueSet = [];
 
-        for(i = 0; i< sceneInfo.DialogueSet.length; i++){
-            dialogueSet[i] = new engine.Dialogue(this.kBg, this.kAvatar, this.kTextBg, this.kNameText, this.kDialogueText);
+ 
 
-            dialogueSet[i].setLargeBg(sceneInfo.DialogueSet[i].LargeBg);
-            dialogueSet[i].setAvatar(sceneInfo.DialogueSet[i].Avatar);
-            dialogueSet[i].setTextBg(sceneInfo.DialogueSet[i].TextBg);
-            dialogueSet[i].setNameBg(sceneInfo.DialogueSet[i].NameBg);
-            dialogueSet[i].setNameText(sceneInfo.DialogueSet[i].NameText);
-            dialogueSet[i].setDialogueText(sceneInfo.DialogueSet[i].DialogueText[0], sceneInfo.DialogueSet[i].DialogueText[1], sceneInfo.DialogueSet[i].DialogueText[2]);
+    _parseScene(sceneFile) {
+        for (let i = 0; i < sceneFile.Property.length; i++) {
+            this.mPropertyAttribute[i] = sceneFile.Property[i].Attribute;
+            this.mProperty[i] = sceneFile.Property[i].Value;
+            let str = this.mPropertyAttribute[i] + ": " + this.mProperty[i];
+            this.mPropertyRenderable[i] = new engine.FontRenderable(str);
+            this.mPropertyRenderable[i].setColor([1, 0, 0, 1]);
+            this.mPropertyRenderable[i].getXform().setPosition(140, 95-5*i);
+            this.mPropertyRenderable[i].setTextHeight(3);
+        }
+        console.log(this.mPropertyAttribute, this.mProperty);
+        for (let i = 0; i < sceneFile.SceneSet.length; i++) {
+            let dialogInfo = sceneFile.SceneSet[i].Dialog;
+            let dialog = new engine.Dialog();
+            dialog.init(dialogInfo.DialogCam);
+            dialog.setBackgroundTexture(dialogInfo.DialogTexture);
+            dialog.setAvatar(dialogInfo.AvatarTexture);
+            dialog.setName(dialogInfo.NameString);
+            // console.log(info.DialogText);
+            dialog.setParagraph(dialogInfo.DialogText);
+            this.mDialogSet.push(dialog);
 
-            this.mDialogueSet.push(dialogueSet[i]);
+            if (sceneFile.SceneSet[i].hasOwnProperty("Option")) {
+                let optionInfo = sceneFile.SceneSet[i].Option;
+                let layout = optionInfo.Layout === "Vertical" ? true : false;
+                console.log(layout);
+                let options = [];
+                for (let j = 0; j < optionInfo.Content.length; j++) {
+                    let delta = optionInfo.Spacing;
+                    let center = optionInfo.Position[0];
+                    let width = optionInfo.Position[1];
+                    let vp = optionInfo.Position[2];
+                    let _vp = [...vp];
+                    console.log(vp);
+                    if (layout) {
+                        // console.log(vp[1],"-", j,"*",delta);
+                        _vp[1] = vp[1] - (j * delta);
+                    }
+                    else 
+                        _vp[0] = vp[0] + (j * delta);
+                    // console.log(optionInfo.Content[j].Tag);
+                    console.log(j, _vp);
+                    let op = new engine.Option();
+                    op.init(center, width, _vp);
+                    op.setBackgroundTexture(this.kTextBg);
+                    op.setParagraph(optionInfo.Content[j].Tag);
+                    op.setExecute(optionInfo.Content[j].Execute);
+                    options.push(op);
+                    // console.log(op);
+                }
+                if (optionInfo.Relationship === "Together") {
+                    for (let j = 0; j < options.length; j++)
+                        options[j].setOptionGroup(options);
+                }
+                this.mOptionSet.push(options);
+            }
+            else
+                this.mOptionSet.push(null);
         }
     }
+
+
+       // _parseDialogues(sceneInfo){
+    //     let i;
+    //     let dialogueSet = [];
+
+    //     for(i = 0; i< sceneInfo.DialogueSet.length; i++){
+    //         dialogueSet[i] = new engine.Dialogue(this.kBg, this.kAvatar, this.kTextBg, this.kNameText, this.kDialogueText);
+
+    //         dialogueSet[i].setLargeBg(sceneInfo.DialogueSet[i].LargeBg);
+    //         dialogueSet[i].setAvatar(sceneInfo.DialogueSet[i].Avatar);
+    //         dialogueSet[i].setTextBg(sceneInfo.DialogueSet[i].TextBg);
+    //         dialogueSet[i].setNameBg(sceneInfo.DialogueSet[i].NameBg);
+    //         dialogueSet[i].setNameText(sceneInfo.DialogueSet[i].NameText);
+    //         dialogueSet[i].setDialogueText(sceneInfo.DialogueSet[i].DialogueText[0], sceneInfo.DialogueSet[i].DialogueText[1], sceneInfo.DialogueSet[i].DialogueText[2]);
+
+    //         this.mDialogueSet.push(dialogueSet[i]);
+    //     }
+    // }
 }
 
 export default MyGame;

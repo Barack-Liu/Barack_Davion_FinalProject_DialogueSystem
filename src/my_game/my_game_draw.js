@@ -14,11 +14,11 @@ MyGame.prototype.drawWorld = function(cam) {
         this.mBg.draw(cam);
 
         //Draw all available dialogue
-        for(let i = 0; i < this.mDialogueSet.length; i++){
-            if(this.mDialogueSet[i].mVisible){
-                this.mDialogueSet[i].draw(cam); 
-            }
-        }
+        // for(let i = 0; i < this.mDialogueSet.length; i++){
+        //     if(this.mDialogueSet[i].mVisible){
+        //         this.mDialogueSet[i].draw(cam); 
+        //     }
+        // }
 }
     //
     // This is the draw function, make sure to setup proper drawing environment, and more
@@ -29,7 +29,14 @@ MyGame.prototype.draw = function() {
         engine.clearCanvas([1, 1, 1, 1]); // clear to light gray
         this.drawWorld(this.mCamera);
         //this.mZoomCams.draw();
-        this.mDialog.draw(this.mCamera);
+        for (let i = 0; i < this.mPropertyRenderable.length; i++)
+            this.mPropertyRenderable[i].draw(this.mCamera);
+        this.mDialogSet[this.mCurDialog].draw(this.mCamera);
+        if (this.mOptionSet[this.mCurDialog] !== null) {
+            for (let i = 0; i < this.mOptionSet[this.mCurDialog].length; i++) {
+                this.mOptionSet[this.mCurDialog][i].draw();
+            }
+        }
     }
 
 export default MyGame;

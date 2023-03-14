@@ -12,19 +12,33 @@ class Dialog {
         this.mNextDialog = null;
     }
 
-    init(center, width, btlCorner, rw, rh) {
+    init(dc) {
+        // console.log(dc);
+        let center = dc.Center;
+        let width = dc.Width;
+        let vp = dc.Viewport;
         this.mDialogCam = new engine.Camera( 
             vec2.fromValues(center[0], center[1]),
             width,                       
             // width of camera is w,
-            [btlCorner[0], btlCorner[1], rw, rh]           
+            vp           
             // bottom left coner at btlCorner
             //viewport resolution is (rx, ry)
         );
         this.mDialogCam.setBackgroundColor([1, 1, 0, 1]);
 
 
-        // Avatar
+        // Name Camera
+        let px = 200;
+        let gap = 10;
+        let btltX = vp[0], btltY = vp[1] + vp[3] + gap;
+
+        this.mNameCam = new engine.Camera( 
+            vec2.fromValues(0, 0),
+            px / (vp[2] / width),
+            [btltX, btltY, px, 80]
+        );
+        this.mNameCam.setBackgroundColor[0, 0, 0, 1];
     }
 
     draw(cam) {
@@ -40,8 +54,13 @@ class Dialog {
         this.mNameRenderable.draw(this.mNameCam);
     }
 
-    update() {
+    update(myGame) {
         this.mTextRenderable.update();
+        if(engine.input.isButtonClicked(engine.input.eMouseButton.eLeft)) {
+            if (this.mDialogCam.isMouseInViewport() && myGame.mCurDialog < myGame.mDialogSet.length-1) {
+                myGame.mCurDialog++;
+            }
+        }
     }
 
     setAvatar(avatar) {
@@ -50,26 +69,12 @@ class Dialog {
         this.mAvatar.getXform().setPosition(89, 67);
     }
 
-    setName(name, gap = 0) {
+    setName(name) {
         // A font renderable for displaying avatar name
         this.mNameRenderable = new engine.FontRenderable(name);
         this.mNameRenderable.setTextHeight(2);
         this.mNameRenderable.setColor([1, 1, 1, 1]);
         this.mNameRenderable.getXform().setPosition(0, 0);
-        let w = this.mNameRenderable.getStringWidth();
-        let wid = this.mDialogCam.getWCWidth();
-        
-        let vp = this.mDialogCam.getViewport();
-        let px = 200;
-        let btltX = vp[0], btltY = vp[1] + vp[3] + gap;
-        console.log(px / (vp[2] / wid), vp[2] / wid);
-        console.log(w, btltX, btltY);
-        this.mNameCam = new engine.Camera( 
-            vec2.fromValues(0, 0),
-            px / (vp[2] / wid),
-            [btltX, btltY, px, 80]
-        );
-        this.mNameCam.setBackgroundColor[0, 0, 0, 1];
     }
 
     setNameTexture(tex) {
@@ -82,6 +87,8 @@ class Dialog {
         this.mCamBg = new engine.TextureRenderable(bgTex); 
         this.mCamBg.getXform().setPosition(this.mDialogCam.getWCCenter()[0], this.mDialogCam.getWCCenter()[1]);
         this.mCamBg.getXform().setSize(this.mDialogCam.getWCWidth(), this.mDialogCam.getWCHeight());
+
+        this.setNameTexture(bgTex);
     }
 
     

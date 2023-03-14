@@ -58,6 +58,7 @@ import DialogueUI from "./dialogue/dialogue_ui.js";
 import DialogueText from "./dialogue/dialogue_text.js";
 import Dialogue from "./dialogue/dialogue.js";
 import Dialog from "./dialogue/dialog.js";
+import Option from "./dialogue/option.js";
 
 // general engine utilities
 function init(htmlCanvasID) {
@@ -106,7 +107,7 @@ export default {
     GameObject, GameObjectSet,
 
     //Dialogue 
-    DialogueUI, DialogueText, Dialogue, Dialog,
+    DialogueUI, DialogueText, Dialogue, Dialog, Option,
 
     // constants
     eTexCoordArrayIndex, eAnimationType, eBoundCollideStatus,
