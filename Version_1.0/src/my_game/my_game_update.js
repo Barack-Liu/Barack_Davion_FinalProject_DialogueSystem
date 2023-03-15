@@ -11,38 +11,13 @@ import MyGame from "./my_game_draw.js";
 // The Update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!
 MyGame.prototype.update = function () {
-    //Left mouse botton click
+
+    const {buttonParentNode1} = window;
 
     //Update dialogue
     for(let i = 0; i < this.mDialogueSet.length; i++){
         this.mDialogueSet[i].update();
     }
-
-    //Update for Class Dialog
-    //this.mDialog.update();
-
-        // //When button is clicked
-        // const button1 = document.getElementById('button1');
-        // if(button1 != null){
-        //     button1.addEventListener('click', function(event){
-        //         event.stopPropagation();
-        //         //event.preventDefault();
-    
-        //         window.mIsOptionClicked = true;
-    
-        //         if(button1.parentNode){    
-        //             button1.parentNode.removeChild(button1);
-        //     }
-        //     });
-        // } 
-
-        //When mouse is clicked
-        //const button1 = document.getElementById('button1');
-        //const button2 = document.getElementById('button2');
-        //const button3 = document.getElementById('button3');
-
-        //const {buttonParentNode1, button1, button2, button3} = window;
-        const {buttonParentNode1} = window;
 
         document.addEventListener('click', function(event){
             //when button 1 is clicked
@@ -52,13 +27,6 @@ MyGame.prototype.update = function () {
     
                 if((buttonParentNode1) && (buttonParentNode1.contains(button1)) && (buttonParentNode1.contains(button2)) && (buttonParentNode1.contains(button3))){    
                     console.log("remove button");
-                    //button1.parentNode.removeChild(button1);
-                    //button2.parentNode.removeChild(button2);
-                    //button3.parentNode.removeChild(button3);
-
-                    // buttonParentNode1.removeChild(button1);
-                    // buttonParentNode1.removeChild(button2);
-                    // buttonParentNode1.removeChild(button3);
 
                     console.log("button1 before remove = " + button1);
 
@@ -103,10 +71,7 @@ MyGame.prototype.update = function () {
 
     //When mIsOptionClicked1 is true, play certain dialogue
     if(window.mIsOptionClicked1){
-        //console.log("mCounter = " + (this.mCounter - 1));
         this.mDialogueSet[this.mCounter].mVisible = false;
-
-        //console.log("this.kHealthValue:" + this.kHealthValue);
 
         //Update health
         this.kHealthValue += this.mDialogueSet[this.mCounter - 1].kHealthAdd1;
@@ -124,9 +89,6 @@ MyGame.prototype.update = function () {
         this.kDefendValue += this.mDialogueSet[this.mCounter - 1].kDefendAdd1;
         this.mDefend.setText(this.mDialogueSet[this.mCounter - 1].kDefend + ":" + this.kDefendValue);           
 
-        //console.log("this.mDialogueSet[this.mCounter - 1].kHealthAdd1:" + this.mDialogueSet[this.mCounter - 1].kHealthAdd1);
-        //console.log("this.kHealthValue:" + this.kHealthValue);
-
         //Effect mode 1
         if(this.mDialogueSet[this.mCounter - 1].mEffectMode1 == 1){
             this.mDialogueSet[this.mDialogueSet[this.mCounter - 1].mOptionNextNumber1 - 1].oscillatePlayer();
@@ -139,8 +101,6 @@ MyGame.prototype.update = function () {
 
         this.mDialogueSet[this.mCounter].mVisible = true;
         
-        
-        //console.log("mOptionNextNum1 = " + this.mDialogueSet[this.mCounter - 1].mOptionNextNumber1);
         window.mIsOptionClicked1 = false;
     }
 
@@ -171,7 +131,7 @@ MyGame.prototype.update = function () {
 
         //Update next slide
         this.mCounter = this.mDialogueSet[this.mCounter - 1].mOptionNextNumber2 - 1;
-        //console.log("mOptionNextNumber2 = " + this.mDialogueSet[this.mCounter - 1].mOptionNextNumber2);
+
         this.mDialogueSet[this.mCounter].mVisible = true;
         
         window.mIsOptionClicked2 = false;
@@ -205,7 +165,6 @@ MyGame.prototype.update = function () {
         //Update next slide
         this.mCounter = this.mDialogueSet[this.mCounter - 1].mOptionNextNumber3 - 1;
         this.mDialogueSet[this.mCounter].mVisible = true;
-        //console.log("mOptionNextNum3 = " + this.mDialogueSet[this.mCounter - 1].mOptionNextNumber3);
         
         window.mIsOptionClicked3 = false;
     }
@@ -230,23 +189,6 @@ MyGame.prototype.update = function () {
         window.mIsOtherClicked = false;
     }
 
-
-    //console.log("window.mIsOptionClicked = " + window.mIsOptionClicked);
-   
-    //When dialogue is clicked
-    //Button is not clicked and mouse is clicked
-    // if(engine.input.isButtonClicked(engine.input.eMouseButton.eLeft) && (!window.mIsOptionClicked)){
-    //     //if(this.mDialogueSet[this.mCounter].isMouseInside()){
-        
-    //     if(this.mCounter < this.mDialogueSet.length){
-    //         this.mDialogueSet[this.mCounter].mVisible = true;
-    //         if(this.mCounter - 1 >= 0){
-    //             this.mDialogueSet[this.mCounter - 1].mVisible = false;
-    //         }
-
-    //         this.mCounter += 1;
-    //     }
-    //}
     }
 
 export default MyGame;
